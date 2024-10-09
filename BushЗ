@@ -1,0 +1,63 @@
+nano calculations.sh
+
+#!/bin/bash
+
+# Задание 3-8: 
+echo "Задание 3-8: Остаток от деления и modulo"
+echo "1697 % 13 = $((1697 % 13))"
+echo "1697 modulo 13 = $((1697 % 13))"
+echo "772 % -45 = $((772 % -45))"
+echo "772 modulo -45 = $((772 % -45))"
+echo "568 % 12 = $((568 % 12))"
+echo "-568 modulo 12 = $((-568 % 12))"
+echo "-5437 % -17 = $((-5437 % -17))"
+echo "-5437 modulo -17 = $((-5437 % -17))"
+echo ""
+
+# Задание 3-9: 
+echo "Задание 3-9: Побитовое отрицание (беззнаковые)"
+for num in 56 1018 58362; do
+    negated=$((~num & 0xFFFF))  # Ограничиваем до 2 байт
+    echo "~$num = $negated (в двоичном: $(printf '%016b' $negated))"
+done
+
+echo "Задание 3-9: Побитовое отрицание (знаковые)"
+for num in 56 1018 58362; do
+    negated=$((~num))  # Для знаковых чисел
+    echo "~$num = $negated (в двоичном: $(printf '%016b' $negated))"
+done
+echo ""
+
+# Задание 3-10: 
+echo "Задание 3-10: Побитовое И, ИЛИ, исключающее ИЛИ (беззнаковые)"
+for a in 1122 49608; do
+    if [ $a -eq 1122 ]; then
+        b=908
+    else
+        b=33036
+    fi
+    bitwise_and=$((a & b))
+    bitwise_or=$((a | b))
+    bitwise_xor=$((a ^ b))
+    echo "$a & $b = $bitwise_and (в двоичном: $(printf '%016b' $bitwise_and))"
+    echo "$a | $b = $bitwise_or (в двоичном: $(printf '%016b' $bitwise_or))"
+    echo "$a ^ $b = $bitwise_xor (в двоичном: $(printf '%016b' $bitwise_xor))"
+    echo ""
+done
+
+# Задание 3-11: 
+echo "Задание 3-11: Арифметические битовые сдвиги (знаковые)"
+for num in 25649 9154; do
+    if [ $num -eq 25649 ]; then
+        echo "$num >> 3 = $((num >> 3))"
+        echo "$num << 2 = $((num << 2))"
+    else
+        echo "$num >> 4 = $((num >> 4))"
+        echo "$num << 3 = $((num << 3))"
+    fi
+done
+
+
+chmod +x calculations.sh
+
+./calculations.sh
